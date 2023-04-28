@@ -5,7 +5,7 @@ import 'boc_enum.dart';
 class BOCSessionConfiguration {
   /*
   静态资源文件的路径, 默认为空。
-  如果为远程文件，则应为完成路径。
+  如果为远程文件，则应为完整路径。
   如果为本地文件，则应为文件所在路径（不包含文件）。
    */
   String? resourcePath;

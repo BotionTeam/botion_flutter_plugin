@@ -27,16 +27,6 @@ dependencies:
   botion_flutter_plugin: ^0.0.1
 ```
 
-## Import SDK
-
-### Android
-```groovy
-implementation 'com.botion.android:captcha:1.0.0'
-```
-
-### iOS
-
-
 ## Configuration
 
 Create your IDs and keys (Botion CAPTCHA) on [Botion dashboard](https://www.botion.com/), and deploy the corresponding back-end API based on [otion documents](https://docs.botion.com/BehaviorVerification/overview/start/).

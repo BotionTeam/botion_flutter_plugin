@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
           await validateCaptchaResult(result
               .map((key, value) => MapEntry(key.toString(), value.toString())));
         } else {
-          // 终端用户完成验证错误，自动重试
+          // 终端用户完成验证错误，自动刷新
           debugPrint("Captcha 'onResult' state: $status");
         }
       }, onError: (Map<String, dynamic> message) async {
