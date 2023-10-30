@@ -22,11 +22,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
-  /// 监控页面配置变化
+  /// Monitor page configuration changes
   static const MethodChannel _demoChannel = MethodChannel('boc_flutter_demo');
 
   /// TO-DO
-  /// 集成前，请先替换从后台申请的 `captchaId`
   /// Before initial new instance, replace `captchaId` sample with one of the captchaId registered from account backend.
   late final BocFlutterPlugin captcha;
 
@@ -57,7 +56,7 @@ class _MyAppState extends State<MyApp> {
 
       captcha.addEventHandler(onShow: (Map<String, dynamic> message) async {
         // TO-DO
-        // 验证视图已展示
+        // Verification view is shown
         debugPrint("Captcha did show");
       }, onResult: (Map<String, dynamic> message) async {
         debugPrint("Captcha result: $message");
@@ -70,12 +69,12 @@ class _MyAppState extends State<MyApp> {
         String status = message["status"];
         if (status == "1") {
           // TODO
-          // 发送 message["result"] 中的数据向服务端二次查询接口查询结果
+          // Send the data in message["result"] to the server secondary query interface to query the results
           Map result = message["result"] as Map;
           await validateCaptchaResult(result
               .map((key, value) => MapEntry(key.toString(), value.toString())));
         } else {
-          // 终端用户完成验证错误，自动刷新
+          // End user completed verification error, automatically refreshed
           debugPrint("Captcha 'onResult' state: $status");
         }
       }, onError: (Map<String, dynamic> message) async {
@@ -86,25 +85,25 @@ class _MyAppState extends State<MyApp> {
           gravity: ToastGravity.BOTTOM,
         );
         String code = message["code"];
-        // TODO 处理验证中返回的错误
+        // TODO Handling errors returned in validation
         if (Platform.isAndroid) {
-          // Android 平台
+          // Android platform
           if (code == "-14460") {
-            // 验证会话已取消
+            // Captcha session canceled
           } else {
-            // 更多错误码参考开发文档
+            // For more error codes, please refer to the development documentation.
             // https://docs.botion.com/boc/apirefer/errorcode/android
           }
         }
 
         if (Platform.isIOS) {
-          // iOS 平台
+          // iOS platform
           if (code == "-20201") {
-            // 验证请求超时
+            // Verification request timed out
           } else if (code == "-20200") {
-            // 验证会话已取消
+            // Captcha session canceled
           } else {
-            // 更多错误码参考开发文档
+            // For more error codes, please refer to the development documentation.
             // https://docs.botion.com/boc/apirefer/errorcode/ios
           }
         }
@@ -186,7 +185,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                   onPressed: verify,
-                  child: const Text('点击验证')),
+                  child: const Text('click to start verification')),
             ],
           ),
         ),

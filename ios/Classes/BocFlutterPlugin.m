@@ -67,6 +67,19 @@
         if (params[@"language"]) {
             config.language = params[@"language"];
         }
+        if (params[@"apiServers"]) {
+            NSArray<NSString *> *apiServers = params[@"apiServers"];
+            if ([apiServers isKindOfClass:[NSArray class]]) {
+                config.apiServers = apiServers;
+            }
+        }
+        if (params[@"staticServers"]) {
+            NSArray<NSString *> *staticServers = params[@"staticServers"];
+            if ([staticServers isKindOfClass:[NSArray class]]) {
+                config.staticServers = staticServers;
+            }
+        }
+        
         if (params[@"additionalParameter"] && [params[@"additionalParameter"] isKindOfClass:[NSDictionary class]]) {
             config.additionalParameter = params[@"additionalParameter"];
         }
