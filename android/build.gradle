@@ -51,5 +51,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'com.botion.android:captcha:1.0.0'
+    implementation 'com.botion.android:captcha:1.0.3'
 }

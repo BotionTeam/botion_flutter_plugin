@@ -3,7 +3,9 @@ package com.botion.captcha.flutter.boc_flutter_plugin
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import com.botion.captcha.BOCaptchaClient
 import com.botion.captcha.BOCaptchaConfig
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -13,6 +15,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONArray
 import org.json.JSONObject
 
 /** BocFlutterPlugin */
@@ -55,6 +58,7 @@ class BocFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         channel.setMethodCallHandler(null)
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     private fun initWithCaptcha(context: Context, param: Any?) {
         if (param !is Map<*, *>) {
             return
@@ -87,7 +91,7 @@ class BocFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 configBuilder.setDebug(configParams["debugEnable"] as Boolean)
             }
             if (configParams.containsKey("openLog")) {
-                boCaptchaClient?.openLog(configParams["openLog"] as Boolean)
+                boCaptchaClient?.setLogEnable(configParams["openLog"] as Boolean)
             }
             if (configParams.containsKey("canceledOnTouchOutside")) {
                 configBuilder.setCanceledOnTouchOutside(configParams["canceledOnTouchOutside"] as Boolean)
@@ -98,11 +102,20 @@ class BocFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             if (configParams.containsKey("language")) {
                 configBuilder.setLanguage(configParams["language"] as String)
             }
+            if (configParams.containsKey("staticServers")) {
+                val staticServers =configParams["staticServers"] as ArrayList<String>
+                configBuilder.setStaticServers(staticServers.toTypedArray())
+            }
+            if (configParams.containsKey("apiServers")) {
+                val apiServers =configParams["apiServers"] as ArrayList<String>
+                configBuilder.setApiServers(apiServers.toTypedArray())
+            }
             if (configParams.containsKey("additionalParameter")) {
                 val additionalParameter: Map<String, Any> =
                     configParams["additionalParameter"] as Map<String, Any>
                 additionalParameter.forEach {
-                    hashMap[it.key] = it.value
+                    hashMap[it.key] =
+                        if (it.value is ArrayList<*>) JSONArray(it.value as ArrayList<*>) else it.value
                 }
             }
             configBuilder.setParams(hashMap)
@@ -110,7 +123,6 @@ class BocFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         } else {
             boCaptchaClient?.init(param["captchaId"] as String)
         }
-
     }
 
     private fun verifyWithCaptcha() {
