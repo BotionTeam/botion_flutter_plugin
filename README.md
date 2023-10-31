@@ -42,6 +42,8 @@ var config = BOCSessionConfiguration();
     config.language = "en";
     config.debugEnable = true;
     config.backgroundColor = Colors.orange;
+    config.apiServers = ["static.example.com"];
+    config.staticServers = ["bcaptcha.example.com"];
     captcha =
         BocFlutterPlugin("123456789012345678901234567890ab",config);
 ```
