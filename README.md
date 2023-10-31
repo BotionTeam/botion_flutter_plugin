@@ -24,7 +24,7 @@ or
 
 ```yaml
 dependencies:
-  botion_flutter_plugin: ^0.0.1
+  botion_flutter_plugin: ^0.0.2
 ```
 
 ## Configuration

@@ -3,7 +3,7 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - botion_flutter_plugin (0.0.1):
+  - botion_flutter_plugin (0.0.2):
     - Flutter
     - BOCaptcha-iOS
   - BOCaptcha-iOS (1.5.0)

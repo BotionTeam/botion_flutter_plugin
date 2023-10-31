@@ -42,6 +42,9 @@ class BocFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "verify" -> {
                 verifyWithCaptcha()
             }
+            "close" -> {
+                boCaptchaClient?.cancel()
+            }
             "configurationChanged" -> {
                 configurationChanged(Configuration())
             }
@@ -90,8 +93,8 @@ class BocFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             if (configParams.containsKey("debugEnable")) {
                 configBuilder.setDebug(configParams["debugEnable"] as Boolean)
             }
-            if (configParams.containsKey("openLog")) {
-                boCaptchaClient?.setLogEnable(configParams["openLog"] as Boolean)
+            if (configParams.containsKey("logEnable")) {
+                boCaptchaClient?.setLogEnable(configParams["logEnable"] as Boolean)
             }
             if (configParams.containsKey("canceledOnTouchOutside")) {
                 configBuilder.setCanceledOnTouchOutside(configParams["canceledOnTouchOutside"] as Boolean)

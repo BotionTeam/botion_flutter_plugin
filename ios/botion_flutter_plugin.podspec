@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'botion_flutter_plugin'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'The official BotionCaptcha flutter plugin project.'
   s.description      = <<-DESC
 The official flutter plugin project for BotionCaptcha.
